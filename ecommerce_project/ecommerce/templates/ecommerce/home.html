@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Home - My eCommerce{% endblock %}
+
+{% block content %}
+  <h2>Products</h2>
+
+  {% if products %}
+    {% for product in products %}
+      <div class="card">
+        <h3><a href="{% url 'product_detail' product.id %}">{{ product.name }}</a></h3>
+        <p class="small">Store: {{ product.store.name }} — Price: R{{ product.price }} — Qty: {{ product.quantity }}</p>
+
+        <p>{{ product.description|default:"No description" }}</p>
+
+        {% if request.user.is_authenticated and product.store.owner == request.user %}
+          <p><a href="{% url 'add_product' product.store.id %}">Add another product to this store</a></p>
+        {% endif %}
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="card">
+      <p>No products yet. {% if request.user.is_authenticated %} <a href="{% url 'create_store' %}">Create a store</a> to add products.{% endif %}</p>
+    </div>
+  {% endif %}
+{% endblock %}

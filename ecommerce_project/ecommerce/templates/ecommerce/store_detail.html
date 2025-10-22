@@ -1,0 +1,19 @@
+{% extends 'ecommerce/base.html' %}
+{% block content %}
+<h2>{{ store.name }}</h2>
+<p>{{ store.description }}</p>
+
+<a href="{% url 'ecommerce:edit_store' store.id %}" class="btn btn-primary">Edit Store</a>
+<a href="{% url 'ecommerce:add_product_to_store' store.id %}" class="btn btn-success">Add Product</a>
+
+<h3>Products</h3>
+<ul>
+  {% for product in products %}
+    <li>
+      <a href="{% url 'ecommerce:product_detail' product.id %}">{{ product.name }}</a> – {{ product.price }}
+    </li>
+  {% empty %}
+    <li>No products yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

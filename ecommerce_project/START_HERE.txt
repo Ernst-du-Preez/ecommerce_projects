@@ -1,0 +1,70 @@
+╔════════════════════════════════════════════════════════════════╗
+║                                                                ║
+║           WELCOME TO THE E-COMMERCE PLATFORM                   ║
+║                                                                ║
+╚════════════════════════════════════════════════════════════════╝
+
+📖 FIRST TIME USERS - READ THIS:
+
+   If you're new, follow these steps in order:
+
+   1. Read: INSTALL.md (detailed step-by-step installation)
+   2. Or: Just double-click START.bat (Windows) or START.sh (Mac/Linux)
+   3. Access: http://127.0.0.1:8000/ in your browser
+
+🚀 QUICK START OPTIONS:
+
+   Option A - Automatic (Easiest):
+   ✓ Windows: Double-click "START.bat"
+   ✓ Mac/Linux: Run "./START.sh" in terminal
+
+   Option B - Manual (More control):
+   1. Open terminal/command prompt in this folder
+   2. Run: python -m venv venv
+   3. Activate: venv\Scripts\activate (Windows)
+              or: source venv/bin/activate (Mac/Linux)
+   4. Install: pip install -r requirements.txt
+   5. Setup DB: python manage.py migrate
+   6. Create admin: python manage.py createsuperuser
+   7. Run: python manage.py runserver
+
+📚 DOCUMENTATION FILES:
+
+   README.md          - Complete project documentation
+   INSTALL.md         - Detailed installation guide
+   QUICK_REFERENCE.md - Common commands and tips
+   requirements.txt   - List of Python dependencies
+   SETUP_MARIADB.md   - MySQL/MariaDB setup (optional)
+
+❓ NEED HELP?
+
+   Problem                    Solution
+   ────────────────────────────────────────────────────
+   Python not installed    → Download from python.org
+   Import errors           → Run: pip install -r requirements.txt
+   Can't start server      → Check INSTALL.md step-by-step
+   Port 8000 in use        → Use: python manage.py runserver 8080
+
+🌐 IMPORTANT URLS (After Starting Server):
+
+   Main Site:  http://127.0.0.1:8000/
+   Admin:      http://127.0.0.1:8000/admin/
+   API:        http://127.0.0.1:8000/api/
+
+💡 TIPS:
+
+   • Emails appear in your terminal/console (not real emails)
+   • First create an admin account with 'createsuperuser'
+   • Register as a normal user to test buyer features
+   • Create a store to test vendor features
+   • Check README.md for all features and usage
+
+═══════════════════════════════════════════════════════════════
+
+Ready to start? 
+
+👉 Windows users: Double-click START.bat
+👉 Mac/Linux users: Open terminal and run: ./START.sh
+👉 Need help?: Open INSTALL.md
+
+═══════════════════════════════════════════════════════════════

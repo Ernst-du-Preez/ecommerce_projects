@@ -1,0 +1,27 @@
+{% extends "ecommerce/index.html" %}
+{% load static %}
+
+{% block title %}Add Product{% endblock %}
+
+{% block content %}
+<h2>Add a New Product</h2>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    
+    {% for field in form %}
+        <p>
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label><br>
+            {{ field }}
+            {% if field.errors %}
+                <span style="color:red;">{{ field.errors }}</span>
+            {% endif %}
+        </p>
+    {% endfor %}
+
+    <button type="submit">Add Product</button>
+</form>
+
+<p><a href="{% url 'ecommerce:vendor_dashboard' %}">Back to Dashboard</a></p>
+{% endblock %}

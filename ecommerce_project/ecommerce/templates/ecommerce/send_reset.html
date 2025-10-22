@@ -1,0 +1,20 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block title %}Password Reset{% endblock %}
+
+{% block content %}
+<h2>Reset your password</h2>
+
+{% if sent %}
+    <p>If the email exists in our system, a reset link has been sent. Check your inbox.</p>
+{% else %}
+    <form method="POST">
+        {% csrf_token %}
+        <label for="email">Enter your email address:</label><br>
+        <input type="email" name="email" id="email" required><br><br>
+        <button type="submit">Send Reset Link</button>
+    </form>
+{% endif %}
+
+<a href="{% url 'ecommerce:login' %}">Back to login</a>
+{% endblock %}

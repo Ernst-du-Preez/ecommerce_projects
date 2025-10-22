@@ -1,0 +1,37 @@
+{% extends "ecommerce/index.html" %}
+
+{% block title %}Your Cart{% endblock %}
+
+{% block content %}
+<h1>Your Shopping Cart</h1>
+
+{% if items %}
+<table>
+    <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+    </tr>
+    {% for item in items %}
+    <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>${{ item.subtotal }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h3>Total: ${{ total }}</h3>
+
+<form method="post" action="{% url 'ecommerce:checkout' %}">
+    {% csrf_token %}
+    <button type="submit">Proceed to Checkout</button>
+</form>
+
+{% else %}
+<p>Your cart is empty.</p>
+{% endif %}
+
+<a href="{% url 'ecommerce:product_list' %}">Continue Shopping</a>
+{% endblock %}
+

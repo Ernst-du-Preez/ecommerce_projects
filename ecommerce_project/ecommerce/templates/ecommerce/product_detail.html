@@ -1,0 +1,52 @@
+{% extends "ecommerce/index.html" %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2 class="product-title">{{ product.name }}</h2>
+
+    {% if product.image %}
+        <img class="product-image" src="{{ product.image.url }}" alt="{{ product.name }}">
+    {% endif %}
+
+    <div class="small">
+        Store: {{ product.store.name }} | Price: R{{ product.price }} | Stock: {{ product.stock }}
+    </div>
+
+    <p>{{ product.description|default:"No description available." }}</p>
+
+    {% if product.stock > 0 %}
+    <form method="post" action="{% url 'ecommerce:add_to_cart' product.id %}">
+        {% csrf_token %}
+        <label for="quantity">Quantity:</label>
+        <input type="number" name="quantity" id="quantity" value="1" min="1" max="{{ product.stock }}">
+        <button type="submit">Add to Cart</button>
+    </form>
+    {% else %}
+        <p><strong>Out of stock</strong></p>
+    {% endif %}
+</div>
+
+<hr>
+
+<h3>Reviews</h3>
+{% if reviews %}
+    {% for review in reviews %}
+        <div class="card">
+            <p>{{ review.text }}</p>
+            <div class="small">By {{ review.user.username }} {% if review.verified %}(Verified Purchase){% endif %}</div>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No reviews yet.</p>
+{% endif %}
+
+{% if request.user.is_authenticated %}
+    <a href="{% url 'ecommerce:add_review' product.id %}">
+        <button>Add Review</button>
+    </a>
+{% else %}
+    <p><a href="{% url 'ecommerce:login' %}">Login</a> to add a review.</p>
+{% endif %}
+{% endblock %}

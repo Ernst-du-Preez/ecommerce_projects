@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}My eCommerce{% endblock %}</title>
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8f9fa;
+    }
+
+    .nav {
+      background: #2c3e50;
+      color: white;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .nav .logo {
+      font-weight: bold;
+      font-size: 1.4rem;
+    }
+
+    .nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: 500;
+    }
+
+    .nav a:hover {
+      text-decoration: underline;
+    }
+
+    .nav .links {
+      display: flex;
+      align-items: center;
+    }
+
+    .container {
+      padding: 90px 20px 20px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .product-title {
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+    }
+
+    .small {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    button {
+      padding: 8px 14px;
+      border: none;
+      background: #3498db;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background: #2980b9;
+    }
+
+    .product-image {
+      max-width: 150px;
+      max-height: 150px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+    }
+
+    footer {
+      background: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+    }
+
+</style>
+
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="logo">
+      <a href="{% url 'ecommerce:product_list' %}">My eCommerce</a>
+    </div>
+    <div class="links">
+      <a href="{% url 'ecommerce:view_cart' %}">Cart ({{ request.session.cart|length|default:"0" }})</a>
+      {% if request.user.is_authenticated %}
+        {% if is_vendor %}
+          <a href="{% url 'ecommerce:vendor_dashboard' %}">Vendor Dashboard</a>
+        {% endif %}
+        <span class="small">Hi, {{ request.user.username }}</span>
+        <a href="{% url 'ecommerce:logout' %}">Logout</a>
+      {% else %}
+        <a href="{% url 'ecommerce:login' %}">Login</a>
+        <a href="{% url 'ecommerce:register' %}">Register</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <div class="container">
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>

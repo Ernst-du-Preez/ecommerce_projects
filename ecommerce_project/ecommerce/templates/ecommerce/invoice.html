@@ -1,0 +1,15 @@
+<h2>Invoice</h2>
+<p>User: {{ user.username }} ({{ user.email }})</p>
+<p>Date: {{ date }}</p>
+<table>
+<tr><th>Product</th><th>Qty</th><th>Price</th><th>Subtotal</th></tr>
+{% for it in items %}
+<tr>
+  <td>{{ it.product.name }}</td>
+  <td>{{ it.quantity }}</td>
+  <td>{{ it.product.price }}</td>
+  <td>{{ it.subtotal }}</td>
+</tr>
+{% endfor %}
+</table>
+<p>Total: {{ total }}</p>

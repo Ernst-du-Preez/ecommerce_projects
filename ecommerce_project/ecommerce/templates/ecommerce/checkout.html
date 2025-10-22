@@ -1,0 +1,29 @@
+{% extends "ecommerce/index.html" %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+<h1>Checkout Complete</h1>
+
+<p>Thank you for your purchase!</p>
+
+<table>
+    <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+    </tr>
+    {% for item in items %}
+    <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>${{ item.subtotal }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h3>Total Paid: ${{ total }}</h3>
+<p>Date: {{ date }}</p>
+
+<a href="{% url 'ecommerce:product_list' %}">Back to Products</a>
+{% endblock %}

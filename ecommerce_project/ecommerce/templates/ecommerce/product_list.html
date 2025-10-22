@@ -1,0 +1,28 @@
+{% extends "ecommerce/index.html" %}
+
+{% block title %}Products{% endblock %}
+
+{% block content %}
+<h1>Products</h1>
+
+{% if products %}
+<ul>
+  {% for product in products %}
+    <li>
+      <a href="{% url 'ecommerce:product_detail' product.pk %}">{{ product.name }}</a>
+      - ${{ product.price }} (Store: {{ product.store.name }})
+      <form action="{% url 'ecommerce:add_to_cart' product.pk %}" method="post">
+        {% csrf_token %}
+        <input type="number" name="quantity" value="1" min="1">
+        <button type="submit">Add to Cart</button>
+      </form>
+    </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No products available yet.</p>
+{% endif %}
+<a href="{% url 'ecommerce:view_cart' %}" class="btn">🛒 View Cart ({{ request.session.cart|length|default:"0" }})</a>
+
+
+{% endblock %}

@@ -1,0 +1,18 @@
+# Core Django and API
+Django>=5.0
+djangorestframework>=3.14.0
+djangorestframework-simplejwt>=5.3.0
+
+# Image handling
+Pillow>=10.0
+
+# HTTP requests and Twitter integration
+requests>=2.31.0
+tweepy>=4.14.0
+
+# Environment variables (optional)
+python-dotenv>=1.0.0
+
+# Optional: Only needed if using MySQL/MariaDB instead of SQLite
+# Uncomment the line below and install separately if needed:
+# mysqlclient>=2.2.0

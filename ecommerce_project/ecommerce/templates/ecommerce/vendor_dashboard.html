@@ -1,0 +1,39 @@
+{% extends "ecommerce/index.html" %}
+
+{% block title %}Vendor Dashboard{% endblock %}
+
+{% block content %}
+<h1>Welcome, {{ request.user.username }}</h1>
+
+<!-- Stores Section -->
+<h2>Your Stores</h2>
+<a href="{% url 'ecommerce:create_store' %}">+ Add New Store</a>
+<ul>
+  {% for store in stores %}
+    <li>
+      <strong>{{ store.name }}</strong>
+      <a href="{% url 'ecommerce:store_detail' store.pk %}">View</a>
+      <a href="{% url 'ecommerce:edit_store' store.pk %}">Edit</a>
+      <a href="{% url 'ecommerce:delete_store' store.pk %}">Delete</a>
+    </li>
+  {% empty %}
+    <li>No stores created yet.</li>
+  {% endfor %}
+</ul>
+
+<!-- Products Section -->
+<h2>Your Products</h2>
+<a href="{% url 'ecommerce:add_product' %}">+ Add New Product</a>
+<ul>
+  {% for product in products %}
+    <li>
+      {{ product.name }} - ${{ product.price }} (Store: {{ product.store.name }})
+      <a href="{% url 'ecommerce:edit_product' product.pk %}">Edit</a>
+      <a href="{% url 'ecommerce:delete_product' product.pk %}">Delete</a>
+    </li>
+  {% empty %}
+    <li>No products yet.</li>
+  {% endfor %}
+</ul>
+
+{% endblock %}

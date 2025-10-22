@@ -1,0 +1,42 @@
+{% extends "ecommerce/index.html" %}
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<h2>Create an Account</h2>
+<div class="card">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <p>
+            <label for="{{ form.username.id_for_label }}">Username</label>
+            {{ form.username }}
+            {{ form.username.errors }}
+        </p>
+        <p>
+            <label for="{{ form.email.id_for_label }}">Email</label>
+            {{ form.email }}
+            {{ form.email.errors }}
+        </p>
+        <p>
+            <label for="{{ form.password1.id_for_label }}">Password</label>
+            {{ form.password1 }}
+            {{ form.password1.errors }}
+        </p>
+        <p>
+            <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+            {{ form.password2 }}
+            {{ form.password2.errors }}
+        </p>
+        <p>
+            <label for="{{ form.account_type.id_for_label }}">Account Type</label>
+            {{ form.account_type }}
+            {{ form.account_type.errors }}
+        </p>
+
+        <button type="submit">Register</button>
+    </form>
+</div>
+
+<p class="small">Already have an account? <a href="{% url 'ecommerce:login' %}">Login here</a></p>
+{% endblock %}
